@@ -6,7 +6,7 @@
   --font-display: "Outfit", sans-serif;
   --color-brand-primary: #C79C31; /* Yellow/Gold */
   --color-brand-secondary: #14143C; /* Blue */
-  --color-brand-dark: #0A0A24; /* Darker version of the new blue */
+  --color-brand-dark: #14143c; /* Darker version of the new blue */
 }
 
 @layer base {

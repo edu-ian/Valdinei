@@ -13,7 +13,6 @@ import Sidebar from './components/Admin/Sidebar';
 import Dashboard from './components/Admin/Dashboard';
 import PropertyManager from './components/Admin/PropertyManager';
 import LeadsManager from './components/Admin/LeadsManager';
-
 const INITIAL_PROPERTIES: Property[] = [
   {
     id: '1',
@@ -419,15 +418,16 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-slate-50 flex overflow-hidden">
       <Sidebar 
         activeTab={activeAdminTab} 
         setActiveTab={setActiveAdminTab} 
         onLogout={() => setView('public')}
       />
       
-      <main className="flex-1 ml-0 lg:ml-64 p-8 transition-all duration-300">
-        <div className="max-w-7xl mx-auto">
+      {/* Adicionado controle rigoroso de overflow e espaçamento mobile (pt-20) */}
+      <main className="flex-1 w-full h-screen overflow-y-auto overflow-x-hidden ml-0 lg:ml-64 p-4 lg:p-8 pt-20 lg:pt-8 transition-all duration-300">
+        <div className="max-w-7xl mx-auto w-full">
           {activeAdminTab === 'dashboard' && <Dashboard stats={stats} />}
           {activeAdminTab === 'properties' && (
             <PropertyManager 
