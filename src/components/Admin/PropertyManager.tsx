@@ -66,12 +66,12 @@ export default function PropertyManager({ properties, onAddProperty, onDeletePro
             <input 
               type="text" 
               placeholder="Buscar imóveis..." 
-              className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all w-full md:w-64"
+              className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] transition-all w-full md:w-64"
             />
           </div>
           <button 
             onClick={() => setIsAdding(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-secondary rounded-lg hover:bg-brand-primary/90 transition-colors shadow-lg shadow-brand-primary/20"
+            className="flex items-center gap-2 px-4 py-2 bg-[#14143c] text-white rounded-lg hover:bg-[#1c1c54] transition-colors shadow-lg shadow-[#14143c]/20"
           >
             <Plus size={20} />
             Novo Imóvel
@@ -96,7 +96,7 @@ export default function PropertyManager({ properties, onAddProperty, onDeletePro
                 </span>
               </div>
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                <button className="p-2 bg-white rounded-full text-slate-900 hover:bg-brand-primary hover:text-brand-secondary transition-colors">
+                <button className="p-2 bg-white rounded-full text-slate-900 hover:bg-[#14143c] hover:text-white transition-colors">
                   <Edit2 size={18} />
                 </button>
                 <button 
@@ -111,12 +111,12 @@ export default function PropertyManager({ properties, onAddProperty, onDeletePro
               </div>
             </div>
             <div className="p-5">
-              <div className="flex items-center gap-1 text-brand-primary mb-2">
+              <div className="flex items-center gap-1 text-[#14143c] mb-2">
                 <MapPin size={14} />
                 <span className="text-xs font-medium">{property.location}</span>
               </div>
               <h3 className="text-lg font-display text-slate-900 mb-1">{property.title}</h3>
-              <p className="text-xl font-bold text-brand-primary mb-4">
+              <p className="text-xl font-bold text-[#14143c] mb-4">
                 {property.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </p>
               
@@ -145,131 +145,143 @@ export default function PropertyManager({ properties, onAddProperty, onDeletePro
 
       {/* Add Property Modal */}
       {isAdding && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
-            <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-              <h2 className="text-2xl font-display text-slate-900">Novo Imóvel</h2>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm sm:p-4 animate-in fade-in duration-300">
+          
+          {/* Container do Modal: No celular pega a tela toda (h-full w-full), no PC limita o tamanho */}
+          <div className="bg-white w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-4xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
+            
+            {/* Cabeçalho Fixo */}
+            <div className="p-4 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
+              <h2 className="text-xl sm:text-2xl font-display text-[#14143c] font-bold">Novo Imóvel</h2>
               <button 
                 onClick={() => setIsAdding(false)}
-                className="p-2 text-slate-400 hover:text-slate-600 transition-colors"
+                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
               >
                 <X size={24} />
               </button>
             </div>
-            <form onSubmit={handleSubmit} className="p-8 space-y-6 max-h-[70vh] overflow-y-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Título do Imóvel</label>
-                  <input 
-                    required
-                    type="text" 
-                    value={newProperty.title}
-                    onChange={(e) => setNewProperty({...newProperty, title: e.target.value})}
-                    placeholder="Ex: Apartamento no Centro" 
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
+
+            {/* Formulário com Scroll Interno */}
+            <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+              
+              {/* Área Rolável */}
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Título do Imóvel</label>
+                    <input 
+                      required
+                      type="text" 
+                      value={newProperty.title}
+                      onChange={(e) => setNewProperty({...newProperty, title: e.target.value})}
+                      placeholder="Ex: Apartamento no Centro" 
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Localização</label>
+                    <input 
+                      required
+                      type="text" 
+                      value={newProperty.location}
+                      onChange={(e) => setNewProperty({...newProperty, location: e.target.value})}
+                      placeholder="Ex: Centro, Curitiba" 
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Preço (R$)</label>
+                    <input 
+                      required
+                      type="number" 
+                      value={newProperty.price}
+                      onChange={(e) => setNewProperty({...newProperty, price: Number(e.target.value)})}
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Tipo</label>
+                    <select 
+                      value={newProperty.type}
+                      onChange={(e) => setNewProperty({...newProperty, type: e.target.value as any})}
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    >
+                      <option>Apartamento</option>
+                      <option>Casa</option>
+                      <option>Sobrado</option>
+                      <option>Terreno</option>
+                      <option>Studio</option>
+                      <option>Cobertura</option>
+                      <option>Mansão</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Localização</label>
-                  <input 
-                    required
-                    type="text" 
-                    value={newProperty.location}
-                    onChange={(e) => setNewProperty({...newProperty, location: e.target.value})}
-                    placeholder="Ex: Centro, Curitiba" 
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Quartos</label>
+                    <input 
+                      type="number" 
+                      value={newProperty.beds}
+                      onChange={(e) => setNewProperty({...newProperty, beds: Number(e.target.value)})}
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Banheiros</label>
+                    <input 
+                      type="number" 
+                      value={newProperty.baths}
+                      onChange={(e) => setNewProperty({...newProperty, baths: Number(e.target.value)})}
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Vagas</label>
+                    <input 
+                      type="number" 
+                      value={newProperty.parking}
+                      onChange={(e) => setNewProperty({...newProperty, parking: Number(e.target.value)})}
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">Área (m²)</label>
+                    <input 
+                      type="number" 
+                      value={newProperty.area}
+                      onChange={(e) => setNewProperty({...newProperty, area: Number(e.target.value)})}
+                      className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#14143c]/20 focus:border-[#14143c] outline-none transition-all"
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Preço (R$)</label>
-                  <input 
-                    required
-                    type="number" 
-                    value={newProperty.price}
-                    onChange={(e) => setNewProperty({...newProperty, price: Number(e.target.value)})}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Tipo</label>
-                  <select 
-                    value={newProperty.type}
-                    onChange={(e) => setNewProperty({...newProperty, type: e.target.value as any})}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  >
-                    <option>Apartamento</option>
-                    <option>Casa</option>
-                    <option>Sobrado</option>
-                    <option>Terreno</option>
-                    <option>Studio</option>
-                    <option>Cobertura</option>
-                    <option>Mansão</option>
-                  </select>
+
+                <div className="space-y-4 pb-4">
+                  <label className="text-sm font-medium text-slate-700">Fotos do Imóvel</label>
+                  <div className="w-full h-40 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 text-slate-400 hover:border-[#14143c] hover:text-[#14143c] transition-all cursor-pointer bg-slate-50">
+                    <Camera size={32} />
+                    <span className="text-sm font-medium">Clique para fazer upload</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Quartos</label>
-                  <input 
-                    type="number" 
-                    value={newProperty.beds}
-                    onChange={(e) => setNewProperty({...newProperty, beds: Number(e.target.value)})}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Banheiros</label>
-                  <input 
-                    type="number" 
-                    value={newProperty.baths}
-                    onChange={(e) => setNewProperty({...newProperty, baths: Number(e.target.value)})}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Vagas</label>
-                  <input 
-                    type="number" 
-                    value={newProperty.parking}
-                    onChange={(e) => setNewProperty({...newProperty, parking: Number(e.target.value)})}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Área (m²)</label>
-                  <input 
-                    type="number" 
-                    value={newProperty.area}
-                    onChange={(e) => setNewProperty({...newProperty, area: Number(e.target.value)})}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <label className="text-sm font-medium text-slate-700">Fotos do Imóvel</label>
-                <div className="w-full h-40 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 text-slate-400 hover:border-brand-primary hover:text-brand-primary transition-all cursor-pointer bg-slate-50">
-                  <Camera size={32} />
-                  <span className="text-sm font-medium">Clique para fazer upload</span>
-                </div>
-              </div>
-
-              <div className="flex gap-3 pt-4">
+              {/* Rodapé Fixo (Os botões não somem quando você rola a página) */}
+              <div className="p-4 sm:p-6 border-t border-slate-100 bg-slate-50 flex gap-3 shrink-0">
                 <button 
                   type="button"
                   onClick={() => setIsAdding(false)}
-                  className="flex-1 px-6 py-3 border border-slate-200 text-slate-600 rounded-xl font-medium hover:bg-slate-50 transition-colors"
+                  className="flex-1 px-6 py-3 border border-slate-200 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
                 >
                   Cancelar
                 </button>
                 <button 
                   type="submit"
-                  className="flex-1 px-6 py-3 bg-brand-primary text-brand-secondary rounded-xl font-medium hover:bg-brand-primary/90 transition-colors shadow-lg shadow-brand-primary/20"
+                  className="flex-1 px-6 py-3 bg-[#14143c] text-white rounded-xl font-medium hover:bg-[#1c1c54] transition-colors shadow-lg shadow-[#14143c]/20"
                 >
                   Salvar Imóvel
                 </button>
               </div>
+
             </form>
           </div>
         </div>
